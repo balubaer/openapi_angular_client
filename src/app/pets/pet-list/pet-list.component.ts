@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Pet } from 'src/app/api/models';
+import { PetService } from 'src/app/api/services';
 
 @Component({
   selector: 'app-pet-list',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pet-list.component.scss']
 })
 export class PetListComponent implements OnInit {
+  // add `pets` variable which holds the pet list
+  pets: Pet[];
 
-  constructor() { }
+  // add a petService parameter of type PetService to the constructor
+  constructor(private petService: PetService) { }
 
+  // update this method to get the pet list on init
   ngOnInit(): void {
+    this.getPets();
   }
 
+  // add a new function getPets to get the todo list from the service
+  getPets(): void {
+    this.petService.findPetsByStatus$Json({ status: ["available"] }).subscribe(pets => (this.pets = pets));
+  }
 }
