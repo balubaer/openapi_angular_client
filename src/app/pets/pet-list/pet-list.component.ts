@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Pet } from 'src/app/api/models';
 import { PetService } from 'src/app/api/services';
 
@@ -9,7 +10,7 @@ import { PetService } from 'src/app/api/services';
 })
 export class PetListComponent implements OnInit {
   // add `pets` variable which holds the pet list
-  pets: Pet[];
+  pets$: Observable<Pet[]>;
 
   // add a petService parameter of type PetService to the constructor
   constructor(private petService: PetService) { }
@@ -21,6 +22,6 @@ export class PetListComponent implements OnInit {
 
   // add a new function getPets to get the todo list from the service
   getPets(): void {
-    this.petService.findPetsByStatus$Json({ status: ["available"] }).subscribe(pets => (this.pets = pets));
+    this.pets$ = this.petService.findPetsByStatus$Json({ status: ["available"] });
   }
 }

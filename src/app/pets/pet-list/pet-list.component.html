@@ -1,5 +1,6 @@
 <ul class="pets">
-    <li *ngFor="let pet of pets">
-      <span class="badge"></span> Name: {{ pet.name }} 
+    <li *ngFor="let pet of pets$ | async">
+       Name: {{ pet.name }} <a [routerLink]="pet.id"> details</a>
     </li>
   </ul>
+  <a routerLink="new">New</a>

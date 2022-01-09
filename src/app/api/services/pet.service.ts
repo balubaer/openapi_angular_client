@@ -593,6 +593,7 @@ export class PetService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, PetService.GetPetByIdPath, 'get');
     if (params) {
+      rb.header('api_key', 'special-key', {});
       rb.path('petId', params.petId, {});
     }
 

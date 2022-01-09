@@ -1,0 +1,12 @@
+<ul class="pet">
+    <ng-container *ngIf="pet$ | async as pet">
+        <div>Name: {{ pet.name }}</div>
+        <div>Status: {{ pet.status }}</div>
+    </ng-container>
+    <div *ngFor="let url of urls">
+        <marquee><img src="{{ url }}" alt="pic"></marquee>
+    </div>
+    <button (click)="onDelete()">Delete</button>
+    <br>
+    <a routerLink="/">Back</a>
+</ul>
