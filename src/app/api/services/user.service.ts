@@ -39,7 +39,7 @@ export class UserService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `createUser()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
   createUser$Response(params: {
 
@@ -51,7 +51,7 @@ export class UserService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, UserService.CreateUserPath, 'post');
     if (params) {
-      rb.body(params.body, '*/*');
+      rb.body(params.body, 'application/json');
     }
 
     return this.http.request(rb.build({
@@ -73,7 +73,7 @@ export class UserService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `createUser$Response()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
   createUser(params: {
 
@@ -101,7 +101,7 @@ export class UserService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `createUsersWithArrayInput()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
   createUsersWithArrayInput$Response(params: {
 
@@ -113,7 +113,7 @@ export class UserService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, UserService.CreateUsersWithArrayInputPath, 'post');
     if (params) {
-      rb.body(params.body, '*/*');
+      rb.body(params.body, 'application/json');
     }
 
     return this.http.request(rb.build({
@@ -135,7 +135,7 @@ export class UserService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `createUsersWithArrayInput$Response()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
   createUsersWithArrayInput(params: {
 
@@ -163,7 +163,7 @@ export class UserService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `createUsersWithListInput()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
   createUsersWithListInput$Response(params: {
 
@@ -175,7 +175,7 @@ export class UserService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, UserService.CreateUsersWithListInputPath, 'post');
     if (params) {
-      rb.body(params.body, '*/*');
+      rb.body(params.body, 'application/json');
     }
 
     return this.http.request(rb.build({
@@ -197,7 +197,7 @@ export class UserService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `createUsersWithListInput$Response()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
   createUsersWithListInput(params: {
 
@@ -223,79 +223,11 @@ export class UserService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `loginUser$Xml()` instead.
+   * To access only the response body, use `loginUser()` instead.
    *
    * This method doesn't expect any request body.
    */
-  loginUser$Xml$Response(params: {
-
-    /**
-     * The user name for login
-     */
-    username: string;
-
-    /**
-     * The password for login in clear text
-     */
-    password: string;
-  }): Observable<StrictHttpResponse<string>> {
-
-    const rb = new RequestBuilder(this.rootUrl, UserService.LoginUserPath, 'get');
-    if (params) {
-      rb.query('username', params.username, {});
-      rb.query('password', params.password, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/xml'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<string>;
-      })
-    );
-  }
-
-  /**
-   * Logs user into the system.
-   *
-   *
-   *
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `loginUser$Xml$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  loginUser$Xml(params: {
-
-    /**
-     * The user name for login
-     */
-    username: string;
-
-    /**
-     * The password for login in clear text
-     */
-    password: string;
-  }): Observable<string> {
-
-    return this.loginUser$Xml$Response(params).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
-    );
-  }
-
-  /**
-   * Logs user into the system.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `loginUser$Json()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  loginUser$Json$Response(params: {
+  loginUser$Response(params: {
 
     /**
      * The user name for login
@@ -331,11 +263,11 @@ export class UserService extends BaseService {
    *
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `loginUser$Json$Response()` instead.
+   * To access the full response (for headers, for example), `loginUser$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  loginUser$Json(params: {
+  loginUser(params: {
 
     /**
      * The user name for login
@@ -348,7 +280,7 @@ export class UserService extends BaseService {
     password: string;
   }): Observable<string> {
 
-    return this.loginUser$Json$Response(params).pipe(
+    return this.loginUser$Response(params).pipe(
       map((r: StrictHttpResponse<string>) => r.body as string)
     );
   }
@@ -415,68 +347,11 @@ export class UserService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getUserByName$Xml()` instead.
+   * To access only the response body, use `getUserByName()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getUserByName$Xml$Response(params: {
-
-    /**
-     * The name that needs to be fetched. Use user1 for testing.
-     */
-    username: string;
-  }): Observable<StrictHttpResponse<User>> {
-
-    const rb = new RequestBuilder(this.rootUrl, UserService.GetUserByNamePath, 'get');
-    if (params) {
-      rb.path('username', params.username, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/xml'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<User>;
-      })
-    );
-  }
-
-  /**
-   * Get user by user name.
-   *
-   *
-   *
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getUserByName$Xml$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getUserByName$Xml(params: {
-
-    /**
-     * The name that needs to be fetched. Use user1 for testing.
-     */
-    username: string;
-  }): Observable<User> {
-
-    return this.getUserByName$Xml$Response(params).pipe(
-      map((r: StrictHttpResponse<User>) => r.body as User)
-    );
-  }
-
-  /**
-   * Get user by user name.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getUserByName$Json()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getUserByName$Json$Response(params: {
+  getUserByName$Response(params: {
 
     /**
      * The name that needs to be fetched. Use user1 for testing.
@@ -506,11 +381,11 @@ export class UserService extends BaseService {
    *
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getUserByName$Json$Response()` instead.
+   * To access the full response (for headers, for example), `getUserByName$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getUserByName$Json(params: {
+  getUserByName(params: {
 
     /**
      * The name that needs to be fetched. Use user1 for testing.
@@ -518,7 +393,7 @@ export class UserService extends BaseService {
     username: string;
   }): Observable<User> {
 
-    return this.getUserByName$Json$Response(params).pipe(
+    return this.getUserByName$Response(params).pipe(
       map((r: StrictHttpResponse<User>) => r.body as User)
     );
   }
@@ -536,7 +411,7 @@ export class UserService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `updateUser()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
   updateUser$Response(params: {
 
@@ -554,7 +429,7 @@ export class UserService extends BaseService {
     const rb = new RequestBuilder(this.rootUrl, UserService.UpdateUserPath, 'put');
     if (params) {
       rb.path('username', params.username, {});
-      rb.body(params.body, '*/*');
+      rb.body(params.body, 'application/json');
     }
 
     return this.http.request(rb.build({
@@ -576,7 +451,7 @@ export class UserService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `updateUser$Response()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
   updateUser(params: {
 

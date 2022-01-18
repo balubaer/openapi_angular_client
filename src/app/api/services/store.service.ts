@@ -98,11 +98,11 @@ export class StoreService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `placeOrder$Xml()` instead.
+   * To access only the response body, use `placeOrder()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  placeOrder$Xml$Response(params: {
+  placeOrder$Response(params: {
 
     /**
      * order placed for purchasing the pet
@@ -112,64 +112,7 @@ export class StoreService extends BaseService {
 
     const rb = new RequestBuilder(this.rootUrl, StoreService.PlaceOrderPath, 'post');
     if (params) {
-      rb.body(params.body, '*/*');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/xml'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Order>;
-      })
-    );
-  }
-
-  /**
-   * Place an order for a pet.
-   *
-   *
-   *
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `placeOrder$Xml$Response()` instead.
-   *
-   * This method sends `* / *` and handles request body of type `* / *`.
-   */
-  placeOrder$Xml(params: {
-
-    /**
-     * order placed for purchasing the pet
-     */
-    body: Order
-  }): Observable<Order> {
-
-    return this.placeOrder$Xml$Response(params).pipe(
-      map((r: StrictHttpResponse<Order>) => r.body as Order)
-    );
-  }
-
-  /**
-   * Place an order for a pet.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `placeOrder$Json()` instead.
-   *
-   * This method sends `* / *` and handles request body of type `* / *`.
-   */
-  placeOrder$Json$Response(params: {
-
-    /**
-     * order placed for purchasing the pet
-     */
-    body: Order
-  }): Observable<StrictHttpResponse<Order>> {
-
-    const rb = new RequestBuilder(this.rootUrl, StoreService.PlaceOrderPath, 'post');
-    if (params) {
-      rb.body(params.body, '*/*');
+      rb.body(params.body, 'application/json');
     }
 
     return this.http.request(rb.build({
@@ -189,11 +132,11 @@ export class StoreService extends BaseService {
    *
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `placeOrder$Json$Response()` instead.
+   * To access the full response (for headers, for example), `placeOrder$Response()` instead.
    *
-   * This method sends `* / *` and handles request body of type `* / *`.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  placeOrder$Json(params: {
+  placeOrder(params: {
 
     /**
      * order placed for purchasing the pet
@@ -201,7 +144,7 @@ export class StoreService extends BaseService {
     body: Order
   }): Observable<Order> {
 
-    return this.placeOrder$Json$Response(params).pipe(
+    return this.placeOrder$Response(params).pipe(
       map((r: StrictHttpResponse<Order>) => r.body as Order)
     );
   }
@@ -217,68 +160,11 @@ export class StoreService extends BaseService {
    * For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getOrderById$Xml()` instead.
+   * To access only the response body, use `getOrderById()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getOrderById$Xml$Response(params: {
-
-    /**
-     * ID of pet that needs to be fetched
-     */
-    orderId: number;
-  }): Observable<StrictHttpResponse<Order>> {
-
-    const rb = new RequestBuilder(this.rootUrl, StoreService.GetOrderByIdPath, 'get');
-    if (params) {
-      rb.path('orderId', params.orderId, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'blob',
-      accept: 'application/xml'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Order>;
-      })
-    );
-  }
-
-  /**
-   * Find purchase order by ID.
-   *
-   * For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
-   *
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getOrderById$Xml$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getOrderById$Xml(params: {
-
-    /**
-     * ID of pet that needs to be fetched
-     */
-    orderId: number;
-  }): Observable<Order> {
-
-    return this.getOrderById$Xml$Response(params).pipe(
-      map((r: StrictHttpResponse<Order>) => r.body as Order)
-    );
-  }
-
-  /**
-   * Find purchase order by ID.
-   *
-   * For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getOrderById$Json()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getOrderById$Json$Response(params: {
+  getOrderById$Response(params: {
 
     /**
      * ID of pet that needs to be fetched
@@ -308,11 +194,11 @@ export class StoreService extends BaseService {
    * For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
    *
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getOrderById$Json$Response()` instead.
+   * To access the full response (for headers, for example), `getOrderById$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getOrderById$Json(params: {
+  getOrderById(params: {
 
     /**
      * ID of pet that needs to be fetched
@@ -320,7 +206,7 @@ export class StoreService extends BaseService {
     orderId: number;
   }): Observable<Order> {
 
-    return this.getOrderById$Json$Response(params).pipe(
+    return this.getOrderById$Response(params).pipe(
       map((r: StrictHttpResponse<Order>) => r.body as Order)
     );
   }

@@ -3,5 +3,12 @@
     <div [hidden]="!form.get('name').hasError('required')">
       Title is required
     </div>
+    <div [hidden]="newhidden">
+      Pet is submited
+    </div>
+
+    <div [hidden]="!newhidden">
     <button type="submit" [disabled]="!form.valid">submit</button>
+  </div>
+
   </form>

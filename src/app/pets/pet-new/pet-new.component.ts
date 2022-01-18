@@ -14,6 +14,7 @@ export class PetNewComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   private readonly subscriptions = new Subscription();
+  newhidden = true;
 
   constructor(private fb: FormBuilder, private petService: PetService, private router: Router) { }
 
@@ -29,10 +30,15 @@ export class PetNewComponent implements OnInit, OnDestroy {
   onSubmit() {
     const newPet: Pet = {
       name: this.form.value.name,
-      photoUrls: []
+      photoUrls: ['https://littlestpetshop.hasbro.com/pet-tracker/img/pets/2018/2-74.png']
     };
-    this.subscriptions.add(this.petService.addPet$Json({ body: newPet }).subscribe());
-    this.router.navigateByUrl('/pets');
+    this.subscriptions.add(this.petService.addPet({ body: newPet }).subscribe());
+    this.newhidden = false;
+
+    setTimeout(() => {
+      this.router.navigateByUrl('/pets');
+    }
+      , 1000);
   }
 
   ngOnDestroy(): void {

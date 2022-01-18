@@ -24,7 +24,7 @@ export class PetDetailComponent implements OnInit {
       this.route.params.subscribe((params: { petId: number }) => {
         console.log('params:', params);
         //this.pet$ = this.petService.getPetById$Json$Response(params);
-        this.pet$ = this.petService.getPetById$Json(params);
+        this.pet$ = this.petService.getPetById(params);
         this.subs.add(
           this.pet$.subscribe(pet => {
             this.urls = pet.photoUrls;

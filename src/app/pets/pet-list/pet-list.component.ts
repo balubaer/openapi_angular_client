@@ -22,6 +22,6 @@ export class PetListComponent implements OnInit {
 
   // add a new function getPets to get the todo list from the service
   getPets(): void {
-    this.pets$ = this.petService.findPetsByStatus$Json({ status: ["available"] });
+    this.pets$ = this.petService.findPetsByStatus({ status: ["available"] });
   }
 }
