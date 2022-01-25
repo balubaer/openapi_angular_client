@@ -14,6 +14,7 @@ export class PetDetailComponent implements OnInit {
   public pet$: Observable<Pet>;
   public urls: Array<String>;
   public petId: number;
+  newhidden = true;
 
   private readonly subs = new Subscription();
 
@@ -44,6 +45,10 @@ export class PetDetailComponent implements OnInit {
   onDelete(): void {
     console.log('onDelete');
     this.subs.add(this.petService.deletePet({ api_key: 'special-key', petId: this.petId }).subscribe(x=>{}));
-    this.router.navigateByUrl('/pets');
-  }
+    this.newhidden = false;
+
+    setTimeout(() => {
+      this.router.navigateByUrl('/pets');
+    }
+      , 1000);  }
 }

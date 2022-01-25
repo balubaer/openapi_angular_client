@@ -6,7 +6,12 @@
     <div *ngFor="let url of urls">
         <marquee><img src="{{ url }}" alt="pic"></marquee>
     </div>
-    <button (click)="onDelete()">Delete</button>
+    <div [hidden]="newhidden">
+        Pet is deleted
+    </div>
+    <div [hidden]="!newhidden">
+        <button (click)="onDelete()">Delete</button>
+    </div>
     <br>
     <a routerLink="/">Back</a>
 </ul>
