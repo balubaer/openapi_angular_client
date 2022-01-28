@@ -30,7 +30,8 @@ export class PetNewComponent implements OnInit, OnDestroy {
   onSubmit() {
     const newPet: Pet = {
       name: this.form.value.name,
-      photoUrls: ['https://littlestpetshop.hasbro.com/pet-tracker/img/pets/2018/2-74.png']
+      photoUrls: ['https://littlestpetshop.hasbro.com/pet-tracker/img/pets/2018/2-74.png'],
+      status: 'available'
     };
     this.subscriptions.add(this.petService.addPet({ body: newPet }).subscribe());
     this.newhidden = false;
