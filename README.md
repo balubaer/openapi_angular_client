@@ -1,5 +1,21 @@
 # PetStore
 
+## Description
+This project implement a client against an OpenAPI-Server example implementation for Petstore
+
+## OpenApi code generation
+Install generator
+
+```
+sudo npm install -g ng-openapi-gen
+```
+
+Using generator in project directory
+```
+ng-openapi-gen --input openapi.yaml --output src/app/api
+```
+## Angular
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
 
 ## Development server
